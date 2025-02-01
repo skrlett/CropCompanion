@@ -1,8 +1,6 @@
-# React + Vite
+## CropCompanion is a web application designed to help users with various crop-related tasks, such as viewing landing pages and contact information.
 
-# CropCompanion is a web application designed to help users with various crop-related tasks, such as viewing landing pages and contact information.
-
-## Cloning the Repository
+### Cloning the Repository
 
 To clone this repository to your local machine, follow these steps:
 
