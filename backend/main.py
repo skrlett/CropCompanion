@@ -7,7 +7,7 @@ app = FastAPI()
 class Query(BaseModel):
     prompt: str
     system: str = "You help farmer achieve their goals of sustainable farming"
-    model: str = "llama3.2"
+    model: str = "llama3.2:1b"
     stream: bool = False
 
 @app.post("/generate")
