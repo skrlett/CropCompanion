@@ -61,3 +61,15 @@ Make sure you have the following installed:
 ## Error Handling
 
 If there is an error communicating with the external API, the server will respond with a 500 status code and an error message.
+
+## Starting the Ollama Server
+
+To start the Ollama server, follow these steps:
+
+1. Download ollama at `https://ollama.com/`
+
+2. Download the LLM `~ % ollama pull llama3.2`
+
+3. The Ollama server will be running at `http://localhost:11434`.
+
+Make sure the server is running before making any API requests to  python server.
