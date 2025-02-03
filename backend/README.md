@@ -47,7 +47,7 @@ Make sure you have the following installed:
     {
         "prompt": "Your prompt here",
         "system": "You help farmer achieve their goals of sustainable farming",
-        "model": "llama3.2",
+        "model": "llama3.2:1b",
         "stream": false
     }
     ```
@@ -68,7 +68,7 @@ To start the Ollama server, follow these steps:
 
 1. Download ollama at `https://ollama.com/`
 
-2. Download the LLM `~ % ollama pull llama3.2`
+2. Download the LLM `~ % ollama pull llama3.2:1b`
 
 3. The Ollama server will be running at `http://localhost:11434`.
 
