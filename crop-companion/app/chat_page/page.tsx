@@ -15,13 +15,15 @@ export default function Page() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+
+  // Logic to connect chat and server
   const sendMessage = async () => {
     if (!input.trim()) return;
     setMessages([...messages, { role: "user", content: input }]);
     setInput("");
     setLoading(true);
     try{
-        const response = await fetch("https://localhost:8000/generate", {
+        const response = await fetch("https://localhost:8000", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
