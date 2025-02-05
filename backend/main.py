@@ -37,7 +37,7 @@ async def stream_response_from_llm(query: Query):
     conversation_memory[user_id] = history
 
     generator = stream_answer(query.system, query.prompt, history)
-    return StreamingResponse(generator)
+    return StreamingResponse(generator, media_type="text/event-stream; charset=utf-8")
 
 @app.post('/clear_memory')
 def delete_memory():
