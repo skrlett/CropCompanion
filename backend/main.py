@@ -38,3 +38,9 @@ async def stream_response_from_llm(query: Query):
 
     generator = stream_answer(query.system, query.prompt, history)
     return StreamingResponse(generator)
+
+@app.post('/clear_memory')
+def delete_memory():
+    conversation_memory = {}
+
+    return {"value":"mem cache has been cleared"}
