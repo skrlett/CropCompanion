@@ -19,29 +19,60 @@ export default function Page() {
   // Logic to connect chat and server
   const sendMessage = async () => {
     if (!input.trim()) return;
-    setMessages([...messages, { role: "user", content: input }]);
+  
+    setMessages((prev) => [...prev, { role: "user", content: input }]);
     setInput("");
     setLoading(true);
-    try{
-        const response = await fetch("http://localhost:8000/generate", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                prompt: input,
-                system: "You help farmers acheive their goals of sustainable farming.",
-                model:"llama3.2:1b",
-                stream: false,
-            }),
-        });
-        if(!response.ok) throw new Error("Failed to generate response");
-        const data = await response.json();
-        setMessages((prev) => [...prev, { role: "assistant", content: data.generated_text }]);
-    } finally{
-        setLoading(false);
+  
+    try {
+      const response = await fetch("http://localhost:8000/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt: input,
+          system: "You help farmers achieve their goals of sustainable farming.",
+          model: "llama3.2:1b",
+          stream: true, // Enable streaming
+        }),
+      });
+  
+      if (!response.ok) throw new Error("Failed to generate response");
+  
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      let assistantResponse = "";
+  
+      if (reader) {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          const chunk = decoder.decode(value, { stream: true });
+          assistantResponse += chunk;
+  
+          // Update messages in real time
+          setMessages((prev) => {
+            const lastMessage = prev[prev.length - 1];
+            if (lastMessage?.role === "assistant") {
+              return [
+                ...prev.slice(0, -1),
+                { role: "assistant", content: lastMessage.content + chunk },
+              ];
+            } else {
+              return [...prev, { role: "assistant", content: chunk }];
+            }
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setLoading(false);
     }
   };
+  
+  
 
   return (
     <div className="flex flex-col h-screen bg-gray-900 text-white">
