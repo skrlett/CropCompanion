@@ -9,9 +9,6 @@ app = FastAPI()
 # Add CORS middleware
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_methods=['*'], allow_headers=['*'])
 
-# Initialize Ollama
-ollama = OllamaLLM(base_url="http://localhost:11434", model="llama3.2", cache=True)
-
 # Store memory per user (Basic In-Memory Storage)
 conversation_memory = {}
 
@@ -19,11 +16,18 @@ class Query(BaseModel):
     user_id: str = "1"
     prompt: str
     system: str = "You help farmers achieve their goals of sustainable farming"
-    model: str = "llama3.2:1b"
+    model: str = "llama3.2"
     stream: bool = True
 
-async def stream_answer(system_prompt, question, history):
-    full_prompt = f"System: {system_prompt}\nPrevious conversation: {history}\nUser: {question}\nAssistant:"
+async def stream_answer(system_prompt, model, question, history):
+
+    # Initialize Ollama
+    ollama = OllamaLLM(base_url="http://localhost:11434", model=model, cache=True)
+
+    full_prompt = f"""System: {system_prompt}
+                        Conversation history (for context only, do not answer these again):
+                        \nPrevious conversation: {history}\nUser: {question}\nAssistant:"""
+    
     async for chunk in ollama.astream(full_prompt):
         yield chunk
 
@@ -36,7 +40,7 @@ async def stream_response_from_llm(query: Query):
     history += f"\nUser: {query.prompt}\n"
     conversation_memory[user_id] = history
 
-    generator = stream_answer(query.system, query.prompt, history)
+    generator = stream_answer(query.system, query.model, query.prompt, history)
     return StreamingResponse(generator, media_type="text/event-stream; charset=utf-8")
 
 @app.post('/clear_memory')
