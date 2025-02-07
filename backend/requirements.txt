@@ -5,3 +5,4 @@ aiohttp
 requests
 langchain_community
 langchain_ollama
+python-multipart
