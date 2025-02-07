@@ -3,3 +3,5 @@ uvicorn
 httpx
 aiohttp
 requests
+langchain_community
+langchain_ollama

@@ -1,56 +1,40 @@
-'use client';
-import { useState, useEffect, useRef } from "react";
-import { Send } from "lucide-react";
-
-export default function ChatInterface() {
-  const [messages, setMessages] = useState([
-    { role: "assistant", content: "Hello! How can I assist you today?" },
-  ]);
-  const [input, setInput] = useState("");
-  const chatEndRef = useRef(null);
-
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
-  const sendMessage = () => {
-    if (!input.trim()) return;
-    setMessages([...messages, { role: "user", content: input }]);
-    setInput("");
-  };
-
+export default function SoilDataForm() {
   return (
-    <div className="flex flex-col h-screen bg-gray-900 text-white">
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 flex flex-col">
-        {messages.map((msg, index) => (
-          <div
-            key={index}
-            className={`p-3 rounded-lg max-w-xs ${
-              msg.role === "user"
-                ? "bg-blue-600 text-white self-end"
-                : "bg-gray-700 text-white self-start"
-            }`}
-          >
-            {msg.content}
+    <div className="flex flex-col h-screen bg-gray-900 text-white items-center justify-center p-6">
+      <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h2 className="text-xl font-semibold mb-4 text-center">Soil Data Form</h2>
+        <form className="space-y-4">
+          <div>
+            <label htmlFor="Location" className="block text-sm font-medium text-gray-300">
+              Please enter your location
+            </label>
+            <input
+              type="text"
+              id="Location"
+              name="Location"
+              required
+              className="w-full p-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </div>
-        ))}
-        <div ref={chatEndRef} />
-      </div>
-      <div className="p-4 bg-gray-800 border-t border-gray-700 flex items-center">
-        <input
-          type="text"
-          className="flex-1 p-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none text-white"
-          placeholder="Type a message..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-        />
-        <button
-          className="ml-2 p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          onClick={sendMessage}
-        >
-          <Send size={20} />
-        </button>
+          <div>
+            <label htmlFor="SoilType" className="block text-sm font-medium text-gray-300">
+              Please enter your soil type
+            </label>
+            <input
+              type="text"
+              id="SoilType"
+              name="SoilType"
+              required
+              className="w-full p-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200"
+          >
+            Submit
+          </button>
+        </form>
       </div>
     </div>
   );

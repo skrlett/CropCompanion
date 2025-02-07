@@ -58,6 +58,17 @@ Make sure you have the following installed:
     }
     ```
 
+### Clear Memory Cache Text
+
+- **URL:** `/clear_memory`
+- **Method:** `POST`
+- **Response:**
+    ```json
+    {
+        "value":"mem cache has been cleared"
+    }
+    ```
+
 ## Error Handling
 
 If there is an error communicating with the external API, the server will respond with a 500 status code and an error message.

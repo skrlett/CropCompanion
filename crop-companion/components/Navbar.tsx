@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Navbar() {
     return (
         <header className="bg-gray-800 py-4 text-white shadow-md">
@@ -12,13 +14,13 @@ export default function Navbar() {
                     <ul className="flex md:flex-row flex-col 
                             md:items-center md:gap-[4vw] gap-8">
                         <li>
-                            <a className="hover:text-lime-400 transition duration-200" href="#">Home</a>
+                            <Link className="hover:text-lime-400 transition duration-200" href="/">Home</Link>
                         </li>
                         <li>
-                            <a className="hover:text-lime-400 transition duration-200" href="#">About</a>
+                            <Link className="hover:text-lime-400 transition duration-200" href="/">About</Link>
                         </li>
                         <li>
-                            <a className="hover:text-lime-400 transition duration-200" href="#">Contact Support</a>
+                            <Link className="hover:text-lime-400 transition duration-200" href="/">Contact Support</Link>
                         </li>
                     </ul>
                 </div>
