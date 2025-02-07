@@ -11,3 +11,8 @@ passlib
 bcrypt
 python-dotenv
 pymongo
+pandas
+xgboost
+sklearn
+matplotlib
+joblib
