@@ -7,3 +7,4 @@ langchain_community
 langchain_ollama
 python-multipart
 pyjwt
+passlib
