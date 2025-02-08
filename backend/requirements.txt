@@ -8,3 +8,5 @@ langchain_ollama
 python-multipart
 pyjwt
 passlib
+bcrypt
+python-dotenv
