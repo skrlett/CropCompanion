@@ -10,7 +10,7 @@ app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_methods=['*'], allow_headers=['*'])
 
 # Initialize Ollama
-ollama = OllamaLLM(base_url="http://localhost:11434", model="llama3.2", cache=True)
+ollama = OllamaLLM(base_url="http://localhost:11434", model="llama3.2:1b", cache=True)
 
 # Store memory per user (Basic In-Memory Storage)
 conversation_memory = {}
