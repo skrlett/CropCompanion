@@ -23,5 +23,12 @@ package-lock.json
 *.njsproj
 *.sln
 *.sw?
-__pycache__
+
+# local testing files
+test.py
+
+# environment files
+.env
+
+#virtual env
 venv

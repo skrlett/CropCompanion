@@ -1,46 +1,17 @@
-from fastapi import FastAPI, Depends
-from pydantic import BaseModel
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
-from langchain_ollama import OllamaLLM
+from api.routes import auth_routes, llm_routes, user_routes
 
 app = FastAPI()
 
 # Add CORS middleware
 app.add_middleware(CORSMiddleware, allow_origins=['*'], allow_methods=['*'], allow_headers=['*'])
 
-# Initialize Ollama
-ollama = OllamaLLM(base_url="http://localhost:11434", model="llama3.2:1b", cache=True)
+# Include routes
+app.include_router(auth_routes.router)
+app.include_router(llm_routes.router)
+app.include_router(user_routes.router)
 
-# Store memory per user (Basic In-Memory Storage)
-conversation_memory = {}
-
-class Query(BaseModel):
-    user_id: str = "1"
-    prompt: str
-    system: str = "You help farmers achieve their goals of sustainable farming"
-    model: str = "llama3.2:1b"
-    stream: bool = True
-
-async def stream_answer(system_prompt, question, history):
-    full_prompt = f"System: {system_prompt}\nPrevious conversation: {history}\nUser: {question}\nAssistant:"
-    async for chunk in ollama.astream(full_prompt):
-        yield chunk
-
-@app.post('/generate')
-async def stream_response_from_llm(query: Query):
-    user_id = query.user_id
-    history = conversation_memory.get(user_id, "")
-
-    # Update memory with new interaction
-    history += f"\nUser: {query.prompt}\n"
-    conversation_memory[user_id] = history
-
-    generator = stream_answer(query.system, query.prompt, history)
-    return StreamingResponse(generator, media_type="text/event-stream; charset=utf-8")
-
-@app.post('/clear_memory')
-def delete_memory():
-    conversation_memory = {}
-
-    return {"value":"mem cache has been cleared"}
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
