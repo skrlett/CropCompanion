@@ -1,10 +1,10 @@
 from pydantic import BaseModel
 
 class User(BaseModel):
+    user_id: str
     username: str
-    email: str | None = None
-    full_name: str | None = None
+    email: str
+    first_name: str
+    last_name: str
     disabled: bool | None = None
-
-class UserInDB(User):
     hashed_password: str
