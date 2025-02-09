@@ -26,3 +26,6 @@ package-lock.json
 
 # local testing files
 test.py
+
+# environment files
+.env
