@@ -24,4 +24,7 @@ package-lock.json
 *.sln
 *.sw?
 
+# local testing files
+test.py
+
 venv
