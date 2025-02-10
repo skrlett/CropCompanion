@@ -27,4 +27,5 @@ package-lock.json
 # local testing files
 test.py
 
-venv
+# environment files
+.env

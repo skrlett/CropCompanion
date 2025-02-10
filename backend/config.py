@@ -8,3 +8,5 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 MONGO_URI = "mongodb+srv://user1:bWKwWjqR1RHPf8bZ@mycluster.sattk.mongodb.net/?retryWrites=true&w=majority&appName=MyCluster"
 DATABASE = "cropappdb"
+URI = os.getenv("MONGO_URI")
+MONGO_DB_NAME = os.getenv("MONGO_DB_NAME")
