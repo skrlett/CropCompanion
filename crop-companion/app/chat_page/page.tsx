@@ -31,7 +31,7 @@ export default function Page() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwiZXhwIjoxNzM5MjE4MzcxfQ.6pFxh-k1cR1usP_B9EmJSWla17WPPb5vI-TZBPOs_Yw`, // Add Authorization header
+          "Authorization": `Bearer ${token}`, // Add Authorization header
         },
         body: JSON.stringify({
           prompt: input,
