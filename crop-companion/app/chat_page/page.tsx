@@ -26,16 +26,19 @@ export default function Page() {
     setLoading(true);
   
     try {
+      const token = "token"; // Replace with your actual token
       const response = await fetch("http://localhost:8000/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwiZXhwIjoxNzM5MTUxMDg3fQ.vBHLbMj2kBBeWBhwQNpsLxg1o6mxSMBxuAzcNx0sEkc`, // Add Authorization header
         },
         body: JSON.stringify({
           prompt: input,
           system: "You help farmers achieve their goals of sustainable farming.",
           model: "llama3.2:1b",
           stream: true, // Enable streaming
+          username: "johndoe", // Add username
         }),
       });
   
