@@ -31,14 +31,14 @@ export default function Page() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwiZXhwIjoxNzM5MTUxMDg3fQ.vBHLbMj2kBBeWBhwQNpsLxg1o6mxSMBxuAzcNx0sEkc`, // Add Authorization header
+          "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwiZXhwIjoxNzM5MjE4MzcxfQ.6pFxh-k1cR1usP_B9EmJSWla17WPPb5vI-TZBPOs_Yw`, // Add Authorization header
         },
         body: JSON.stringify({
           prompt: input,
           system: "You help farmers achieve their goals of sustainable farming.",
           model: "llama3.2:1b",
           stream: true, // Enable streaming
-          username: "johndoe", // Add username
+          user_id: "johndoe", // Add username
         }),
       });
   
