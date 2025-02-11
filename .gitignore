@@ -29,3 +29,7 @@ test.py
 
 # environment files
 .env
+
+#virtual env
+venv
+__pycache__
