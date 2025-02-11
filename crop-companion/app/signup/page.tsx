@@ -1,5 +1,61 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
 export default function SignupPage() {
+
+    const [formData, setFormData] = useState({
+        firstName:"",
+        lastName:"",
+        email:"",
+        password:"",
+        confirmPassword:"",
+    });
+
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmmition = async (e) => {
+        e.preventDefault();
+        
+        if (formData.password !== formData.confirmPassword) {
+            setError("Passwords do not match");
+            return;
+        }
+
+        setLoading(true);
+        setError("");
+
+        try{
+            const response = await fetch("http://localhost:8000/api/register_user", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    first_name: formData.firstName,
+                    last_name: formData.lastName,
+                    email: formData.email,
+                    username: formData.email,
+                    password: formData.password
+                }),
+            });
+            const data = await response.json();
+
+            if(!response.ok){
+                throw new Error(data.message || "Something went wrong");
+            }
+            alert("Registration successful!");
+            console.log("success!");
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-900 text-white">
         <div className="w-full max-w-md bg-gray-800 p-6 rounded-lg shadow-lg">
