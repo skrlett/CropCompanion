@@ -1,10 +1,9 @@
-import uuid
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 class Messages(BaseModel):
-    uuid: str = Field(default_factory=uuid.uuid4, alias="_id")
-    timestamp: str = Field(...)
-    user_id: str = Field(...)
-    session_id: str = Field(...)
-    user_chat: str = Field(...)
-    ai_chat: str = Field(...)
+    uuid: str
+    timestamp: str 
+    user_id: str 
+    session_id: str
+    user_chat: str 
+    ai_chat: str 
