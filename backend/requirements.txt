@@ -5,6 +5,11 @@ aiohttp
 requests
 langchain_community
 langchain_ollama
+pandas
+xgboost
+sklearn
+matplotlib
+joblib
 python-multipart
 pyjwt
 passlib
