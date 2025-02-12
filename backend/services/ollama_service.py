@@ -35,5 +35,4 @@ async def stream_answer(system_prompt, model, question, history, chat_session_id
 
 def update_conversation_memory(user_id: str, chat_session_id: str):
     history = get_last_10_messages(user_id=user_id, chat_session_id=chat_session_id)
-    
     return history
