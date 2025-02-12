@@ -10,3 +10,9 @@ xgboost
 sklearn
 matplotlib
 joblib
+python-multipart
+pyjwt
+passlib
+bcrypt
+python-dotenv
+pymongo

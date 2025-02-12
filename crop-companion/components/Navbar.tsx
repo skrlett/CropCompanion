@@ -17,7 +17,7 @@ export default function Navbar() {
                             <Link className="hover:text-lime-400 transition duration-200" href="/">Home</Link>
                         </li>
                         <li>
-                            <Link className="hover:text-lime-400 transition duration-200" href="/">About</Link>
+                            <Link className="hover:text-lime-400 transition duration-200" href="/chat_page">Chat Page</Link>
                         </li>
                         <li>
                             <Link className="hover:text-lime-400 transition duration-200" href="/">Contact Support</Link>
