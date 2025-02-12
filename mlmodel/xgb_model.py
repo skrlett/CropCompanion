@@ -50,6 +50,13 @@ def predict_crop_probabilities(nitrogen, phosphorus, potassium, temp_category, h
 
 
 def predict_crop_probabilities_util(inputs_df):
+# Load saved preprocessing models and trained XGBoost model
+scaler = joblib.load("scaler.pkl")
+label_encoder = joblib.load("label_encoder.pkl")
+model = xgb.Booster()
+model.load_model("xgboost_model.json")
+
+def predict_crop_probabilities(inputs_df):
     """
     Accepts a list of soil and climate condition inputs, preprocesses them,
     and returns probability distributions over all crop categories.
@@ -73,3 +80,4 @@ def predict_crop_probabilities_util(inputs_df):
         top_crops.append(dict(top_five))
     
     return {"predictions": str(top_crops)}
+

@@ -11,6 +11,10 @@ import joblib
 
 # Extract training data csv file from zip file
 current_directory = os.path.join(os.getcwd(), 'mlmodel')
+zip_file_path = os.path.join(current_directory, 'training-dataset.zip')
+
+with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+    zip_ref.extractall(current_directory)
 
 # Load csv file to pandas dataframe
 file_path = os.path.join(current_directory, 'Crop_Recommendation.csv')
