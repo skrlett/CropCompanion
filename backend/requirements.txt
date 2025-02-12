@@ -5,6 +5,12 @@ aiohttp
 requests
 langchain_community
 langchain_ollama
+python-multipart
+pyjwt
+passlib
+bcrypt
+python-dotenv
+pymongo
 pandas
 xgboost
 sklearn

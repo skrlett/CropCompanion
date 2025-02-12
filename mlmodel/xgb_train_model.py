@@ -42,8 +42,8 @@ X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 # Save the scaler and label encoder for later use in predictions
-joblib.dump(scaler, "scaler.pkl")
-joblib.dump(label_encoder, "label_encoder.pkl")
+joblib.dump(scaler, "mlmodel/scaler.pkl")
+joblib.dump(label_encoder, "mlmodel/label_encoder.pkl")
 
 
 # Model Training
@@ -75,7 +75,7 @@ model = xgb.train(params, dtrain, num_boost_round=100)
 y_pred_prob = model.predict(dtest)  # Output is a (num_samples, 22) array
 
 # Save the trained model for later use
-model.save_model("xgboost_model.json")
+model.save_model("mlmodel/xgboost_model.json")
 
 ## Evaluate using log loss
 loss = log_loss(y_test, y_pred_prob)
