@@ -76,11 +76,25 @@ export default function Page() {
     }
   };
 
-  const handleNewChat = () => {
+  const handleNewChat = async () => {
     setMessages([
       { role: "assistant", content: "Hello! How can I assist you today?" },
     ]);
     setInput("");
+    try{
+      const response = await fetch("http://localhost:8000/create_new_session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwiZXhwIjoxNzM5MTUxMDg3fQ.vBHLbMj2kBBeWBhwQNpsLxg1o6mxSMBxuAzcNx0sEkc`, // Add Authorization header
+        },
+        body: JSON.stringify({
+          messages:messages
+        }),
+      });
+    }catch(error){
+      console.error("Error:", error);
+    }
   };
   
   

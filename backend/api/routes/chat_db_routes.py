@@ -1,11 +1,36 @@
 from fastapi import APIRouter, HTTPException
-from typing import List
+from typing import List, Annotated
+from models.user import User
+import uuid
+from fastapi import APIRouter, Depends
 from repositories.message_repo import get_all_messages, get_last_10_messages, save_message
-from models.message import Messages
-from datetime import datetime
+from repositories.chat_session_repo import create_session, clear_chat_history, clear_chat_history_current_user
+from backend.models.chats import Message, ChatSession
+from datetime import datetime, timezone
+from core.auth import get_current_active_user
+import requests
 router = APIRouter()
 
-@router.post("/api/create_message")
+@router.post("/create_new_session")
+async def create_new_session(current_user: Annotated[User, Depends(get_current_active_user)]):
+    session_data = ChatSession(
+        _id=str(uuid.uuid4()),
+        user_id = current_user.user_id,
+        timestamp = datetime.now(timezone.utc).isoformat(),
+        message =
+    )
+    create_session(session_data)
+
+@router.post("/clear_session_history")
+async def delete_session_history_current_user(current_user: Annotated[User, Depends(get_current_active_user)]):
+    clear_chat_history_current_user(current_user.user_id)
+
+@router.post("/clear_session_history")
+async def delete_all_sessions_all_users():
+    clear_chat_history()
+
+
+'''@router.post("/api/create_message")
 async def create_message(message_data: Messages):
     chat_data = Messages(
         uuid: str
@@ -69,4 +94,4 @@ def list_books(request: Request):
 def find_book(id: str, request: Request):
     if (book := request.app.database["books"].find_one({"_id": id})) is not None:
         return book
-    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Book with ID {id} not found")
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Book with ID {id} not found")'''

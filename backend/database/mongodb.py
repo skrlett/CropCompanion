@@ -13,7 +13,8 @@ try:
     # Collections
     users_collection = db["users"]
     messages_collection = db["messages"]
-
+    sessions_collection = db["sessions"]
+    
     # Check the connection by listing collections
     print(f"Connected to MongoDB. Collections: {db.list_collection_names()}")
 
