@@ -5,15 +5,14 @@ from database.mongodb import messages_collection
 from models.message import ChatSession, Message
 
 def get_last_10_messages(user_id: str, chat_session_id: str):
-    messages = list(messages_collection.find({"chat_session_id": chat_session_id, "user_id": user_id}).sort("timestamp", -1).limit(10))
+    session_messages = list(messages_collection.find({"chat_session_id": chat_session_id, "user_id": user_id}).sort("timestamp", -1).limit(10))
 
-    # messages_list = [Message(**message) for message in messages]
+    messages = session_messages[0]["messages"]
+
     messages_list_sting = ""
     for message in messages:
-        message['_id'] = str(message['_id'])
         messages_list_sting += "user_chat: " + message["user_chat"] + "response: " + message["ai_response"]
-    
-    return messages_list_sting
+    return str(messages)
 
 def save_message(chat_message_data: ChatSession):
     
