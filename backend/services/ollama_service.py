@@ -27,14 +27,15 @@ async def stream_answer(system_prompt, model, question, history, chat_session_id
     # get the current_chat_object
     all_chat: ChatSession = get_message_session(chat_session_id=chat_session_id)
     all_chat["_id"] = str(all_chat["_id"])
-    all_messages = all_chat.messages
-    all_messages.append(message)
+    all_messages = all_chat["messages"]
+    all_messages.append(message.dict())
+
+    # print(all_messages)
 
     # save all_chat_messages
-    update_message_list(_id = all_chat["_id"])
+    update_message_list(chat_session_id = chat_session_id, messages=all_messages)
 
 def update_conversation_memory(user_id: str, chat_session_id: str):
     history = get_last_10_messages(user_id=user_id, chat_session_id=chat_session_id)
-
-    messages_str = Message.model_dump_json(history)
-    return messages_str
+    
+    return history
