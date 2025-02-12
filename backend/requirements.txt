@@ -13,6 +13,6 @@ python-dotenv
 pymongo
 pandas
 xgboost
-sklearn
+scikit-learn
 matplotlib
 joblib

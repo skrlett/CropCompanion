@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from api.routes import auth_routes, llm_routes, user_routes, chat_db_routes
+from api.routes import auth_routes, llm_routes, user_routes, chat_db_routes, predict_plant
 
 app = FastAPI()
 
@@ -12,6 +12,7 @@ app.include_router(auth_routes.router)
 app.include_router(llm_routes.router)
 app.include_router(user_routes.router)
 app.include_router(chat_db_routes.router)
+app.include_router(predict_plant.router)
 
 #client = MongoClient(MONGO_URI)
 #db = client[DATABASE]

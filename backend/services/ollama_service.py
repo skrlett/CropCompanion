@@ -30,8 +30,6 @@ async def stream_answer(system_prompt, model, question, history, chat_session_id
     all_messages = all_chat["messages"]
     all_messages.append(message.dict())
 
-    # print(all_messages)
-
     # save all_chat_messages
     update_message_list(chat_session_id = chat_session_id, messages=all_messages)
 
