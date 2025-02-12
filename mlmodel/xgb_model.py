@@ -50,11 +50,11 @@ def predict_crop_probabilities(nitrogen, phosphorus, potassium, temp_category, h
 
 
 def predict_crop_probabilities_util(inputs_df):
-# Load saved preprocessing models and trained XGBoost model
-scaler = joblib.load("scaler.pkl")
-label_encoder = joblib.load("label_encoder.pkl")
-model = xgb.Booster()
-model.load_model("xgboost_model.json")
+    # Load saved preprocessing models and trained XGBoost model
+    scaler = joblib.load("scaler.pkl")
+    label_encoder = joblib.load("label_encoder.pkl")
+    model = xgb.Booster()
+    model.load_model("xgboost_model.json")
 
 def predict_crop_probabilities(inputs_df):
     """
