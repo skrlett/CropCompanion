@@ -5,14 +5,12 @@ aiohttp
 requests
 langchain_community
 langchain_ollama
+pandas
+xgboost
+joblib
 python-multipart
 pyjwt
 passlib
 bcrypt
 python-dotenv
 pymongo
-pandas
-xgboost
-sklearn
-matplotlib
-joblib
